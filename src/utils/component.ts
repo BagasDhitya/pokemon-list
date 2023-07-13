@@ -5,3 +5,9 @@ export interface CardProps {
     image?: string,
     description?: string
 }
+
+export interface ButtonProps {
+    id: string,
+    title: string,
+    onClick: React.MouseEventHandler,
+}

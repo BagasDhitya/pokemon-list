@@ -1,6 +1,5 @@
-
 import { useState, useEffect, lazy, Suspense } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import Swal from "sweetalert2"
 import axios from "axios"
 
@@ -13,7 +12,6 @@ const Card = lazy(() => import('../../components/Card'))
 const Detail = () => {
 
     const params: any = useLocation()
-    const navigate: any = useNavigate()
     const [pokemon, setPokemons] = useState<PokemonState>()
 
     const getPokemon = async () => {
@@ -26,9 +24,36 @@ const Detail = () => {
                 sprites: {
                     front_default: response?.data?.sprites?.front_default,
                     back_default: response?.data?.sprites?.back_default
-                }
+                },
+                stats: response?.data?.stats
             }
-            setPokemons(data)
+            getDescription(data)
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Something went wrong, please refresh your page",
+                confirmButtonText: "OK"
+            })
+        }
+    }
+
+    const getDescription = async (data: PokemonState) => {
+        try {
+            const response = await axios.get(`pokemon-species/${data?.id}/`)
+            const flavorTextEntries = response?.data?.flavor_text_entries.slice(3, 8)
+            const pokemon: PokemonState = {
+                id: data?.id,
+                name: data?.name,
+                sprites: {
+                    front_default: data?.sprites?.front_default,
+                    back_default: data?.sprites?.back_default
+                },
+                stats: data?.stats,
+                description: [
+                    flavorTextEntries.map((entry: any) => entry?.flavor_text)
+                ]
+            }
+            setPokemons(pokemon)
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -44,18 +69,16 @@ const Detail = () => {
 
     return (
         <Layout>
-            <div className="flex flex-wrap">
-                <Suspense fallback={<Loading />}>
-                    <div className="w-40 mx-2 my-2">
-                        <Card
-                            id="pokemon"
-                            type="pokemon"
-                            name={pokemon?.name}
-                            image={pokemon?.sprites?.front_default}
-                        />
-                    </div>
-                </Suspense>
-            </div>
+            <Suspense fallback={<Loading />}>
+                <Card
+                    id="detail"
+                    type="detail"
+                    name={pokemon?.name?.toUpperCase()}
+                    image={pokemon?.sprites?.front_default}
+                    stats={pokemon?.stats}
+                    description={pokemon?.description}
+                />
+            </Suspense>
         </Layout>
     )
 }

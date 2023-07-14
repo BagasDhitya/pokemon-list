@@ -7,7 +7,8 @@ export interface CardProps {
     type: "character" | "pokemon" | "detail"
     name?: string,
     image?: string,
-    description?: string
+    stats?: any,
+    description?: []
     onClick?: React.MouseEventHandler
 }
 

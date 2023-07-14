@@ -30,19 +30,19 @@ const Card: FC<CardProps> = ({
                     {image && (
                         <img
                             src={image}
-                            height={100}
-                            width={100}
+                            height={150}
+                            width={150}
                             alt={name}
                             className="mb-4 mx-auto"
                         />
                     )}
                     {name && (
-                        <h2 className="text-xl text-center font-bold mb-2">{name}</h2>
+                        <h2 className="text-xl text-center text-yellow-600 font-bold mb-2">{name}</h2>
                     )}
                     {stats && (
                         <div className='text-yellow-700 font-bold'>
-                            Stats:
-                            <ul className='text-black font-medium mt-5'>
+                            Statistics:
+                            <ul className='text-black font-medium my-5'>
                                 {stats?.map((entry: any, index: number) => (
                                     <li key={index}>{entry.stat.name} : {entry.base_stat}</li>
                                 ))}
@@ -52,7 +52,7 @@ const Card: FC<CardProps> = ({
                     {description && (
                         <div className='text-yellow-700 font-bold'>
                             Description:
-                            <ul className='text-black font-medium mt-5'>
+                            <ul className='text-black font-medium mt-5 mx-auto'>
                                 {description?.map((entry: any, index: number) => (
                                     <li key={index}>{entry}</li>
                                 ))}

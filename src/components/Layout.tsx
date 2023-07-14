@@ -1,5 +1,4 @@
 import { FC } from 'react';
-
 import { LayoutProps } from '../utils/component';
 
 const Layout: FC<LayoutProps> = ({ children }) => {

@@ -7,6 +7,7 @@ import { PokemonState } from "../../utils/type"
 
 import Layout from "../../components/Layout"
 import Loading from "../../components/Loading"
+
 const Card = lazy(() => import('../../components/Card'))
 
 const Detail = () => {
@@ -40,7 +41,7 @@ const Detail = () => {
     const getDescription = async (data: PokemonState) => {
         try {
             const response = await axios.get(`pokemon-species/${data?.id}/`)
-            const flavorTextEntries = response?.data?.flavor_text_entries.slice(3, 8)
+            const description = response?.data?.flavor_text_entries.slice(3, 8)
             const pokemon: PokemonState = {
                 id: data?.id,
                 name: data?.name,
@@ -50,7 +51,7 @@ const Detail = () => {
                 },
                 stats: data?.stats,
                 description: [
-                    flavorTextEntries.map((entry: any) => entry?.flavor_text)
+                    description.map((entry: any) => entry?.flavor_text)
                 ]
             }
             setPokemons(pokemon)

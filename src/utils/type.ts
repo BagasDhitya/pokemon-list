@@ -1,3 +1,12 @@
+export type CharacterState = {
+    results: [
+        {
+            name: string,
+            url: string
+        }
+    ]
+}
+
 export type PokemonState = {
     id: number,
     name: string,

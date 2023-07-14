@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import axios from "axios"
 
-import Pokemon from "../../../public/pokemon.png"
+import Pokemon from "../../assets/pokemon.png"
+import { CharacterState } from "../../utils/type"
 
 import Layout from "../../components/Layout"
 import Loading from "../../components/Loading"
@@ -15,14 +16,17 @@ const Card = lazy(() => import('../../components/Card'))
 const ListCharacters = () => {
 
     const navigate: any = useNavigate()
-    const [character, setCharacters] = useState<[]>()
+    const [character, setCharacters] = useState<CharacterState>()
     const [loading, setLoading] = useState<boolean>(false)
 
     const getCharacter = async () => {
         try {
             setLoading(true)
             const response = await axios.get('/pokemon?limit=10')
-            setCharacters(response?.data?.results)
+            const data: CharacterState = {
+                results: response?.data?.results
+            }
+            setCharacters(data)
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -44,7 +48,7 @@ const ListCharacters = () => {
         <Layout>
             <div className="flex flex-wrap justify-center items-center">
                 {character ? (
-                    character.map((item: any, index: number) => (
+                    character?.results?.map((item: any, index: number) => (
                         <Suspense fallback={loading && <Loading />}>
                             <div className="w-40 mx-2 my-2" key={index}>
                                 <Card

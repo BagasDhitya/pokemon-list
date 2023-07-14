@@ -4,10 +4,17 @@ export interface LayoutProps {
 
 export interface CardProps { 
     id: string,
-    type: "character" | "pokemon" | "detail"
-    name?: string,
-    image?: string,
-    stats?: any,
+    type: "character" | "detail"
+    name: string | undefined,
+    image?: string | undefined,
+    stats?: [{
+        base_stat: number;
+        effort: number;
+        stat: {
+            name: string;
+            url: string;
+        };
+    }],
     description?: []
     onClick?: React.MouseEventHandler
 }

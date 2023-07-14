@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import axios from "axios"
 
+import Pokemon from "../../../public/pokemon.png"
+
 import Layout from "../../components/Layout"
 import Loading from "../../components/Loading"
 import Button from "../../components/Button"
@@ -30,8 +32,8 @@ const ListCharacters = () => {
         }
     }
 
-    const navigatePokemon = (url: string) => {
-        navigate("/detail", {
+    const navigatePokemon = (url: string, name: string) => {
+        navigate(`/detail/${name}`, {
             state: {
                 url: url
             }
@@ -49,15 +51,16 @@ const ListCharacters = () => {
                                     id="character"
                                     type="character"
                                     name={item?.name}
-                                    onClick={() => navigatePokemon(item?.url)}
+                                    onClick={() => navigatePokemon(item?.url, item?.name)}
                                 />
                             </div>
                         </Suspense>
                     ))
+
                 ) : (
                     <div className="w-screen text-center">
                         <img
-                            src="https://cdn.worldvectorlogo.com/logos/pokemon-23.svg"
+                            src={Pokemon}
                             className="my-10"
                         />
                         <p className="text-xl mb-4 text-yellow-700 font-bold">Choose your Character</p>

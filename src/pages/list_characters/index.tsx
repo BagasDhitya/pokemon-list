@@ -5,6 +5,7 @@ import Swal from "sweetalert2"
 import axios from "axios"
 
 import Layout from "../../components/Layout"
+import Loading from "../../components/Loading"
 
 const Card = lazy(() => import('../../components/Card'))
 
@@ -41,7 +42,7 @@ const ListCharacters = () => {
     return (
         <Layout>
             <div className="flex flex-wrap">
-                <Suspense fallback={<div>Loading ...</div>}>
+                <Suspense fallback={<Loading />}>
                     {character &&
                         character.map((item: any, index: number) => (
                             <div className="w-40 mx-2 my-2" key={index}>

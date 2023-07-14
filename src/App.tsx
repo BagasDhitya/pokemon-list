@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import axios from "axios"
 
 import ListCharacters from "./pages/list_characters"
-import ListPokemons from "./pages/list_pokemons"
 import Detail from "./pages/detail"
 
 const App = () => {
@@ -13,8 +12,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<ListCharacters />} path="/" />
-        <Route element={<ListPokemons />} path="/pokemon" />
-        <Route element={<Detail />} path="/pokemon/detail" />
+        <Route element={<Detail />} path="/detail" />
       </Routes>
     </BrowserRouter>
   )

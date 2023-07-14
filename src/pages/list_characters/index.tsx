@@ -28,7 +28,7 @@ const ListCharacters = () => {
     }
 
     const navigatePokemon = (url: string) => {
-        navigate("/pokemon", {
+        navigate("/detail", {
             state: {
                 url: url
             }

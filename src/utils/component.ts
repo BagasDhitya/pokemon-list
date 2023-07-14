@@ -1,6 +1,5 @@
 export interface LayoutProps {
     children?: React.ReactNode
-    type?: "handphone" | "tablet" | "laptop"
 }
 
 export interface CardProps { 

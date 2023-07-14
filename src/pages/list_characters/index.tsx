@@ -40,20 +40,21 @@ const ListCharacters = () => {
 
     return (
         <Layout>
-            <Suspense fallback={<div>Loading ...</div>}>
-                {character &&
-                    character.map((item: any, index: number) => (
-                        <div className="w-40" key={index}>
-                            <Card
-                                id="character"
-                                type="character"
-                                name={item?.name}
-                                onClick={() => navigatePokemon(item?.url)}
-                            />
-                        </div>
-
-                    ))}
-            </Suspense>
+            <div className="flex flex-wrap">
+                <Suspense fallback={<div>Loading ...</div>}>
+                    {character &&
+                        character.map((item: any, index: number) => (
+                            <div className="w-40 mx-2 my-2" key={index}>
+                                <Card
+                                    id="character"
+                                    type="character"
+                                    name={item?.name}
+                                    onClick={() => navigatePokemon(item?.url)}
+                                />
+                            </div>
+                        ))}
+                </Suspense>
+            </div>
         </Layout>
     )
 }

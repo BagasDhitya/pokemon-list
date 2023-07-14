@@ -6,16 +6,16 @@ const Card: FC<CardProps> = ({ id, type, name, image, description, onClick }) =>
         <>
             {
                 type === 'character' &&
-                <div id={id} className="bg-white shadow-lg rounded-lg p-4" onClick={onClick}>
+                <button id={id} className="w-full bg-white shadow-lg rounded-lg p-4 hover:bg-yellow-500 hover:text-white" onClick={onClick}>
                     {name && <h2 className="text-xl font-bold mb-2">{name}</h2>}
-                </div>
+                </button>
             }
             {
                 type === 'pokemon' &&
-                <div id={id} className="bg-white shadow-lg rounded-lg p-4" onClick={onClick}>
+                <button id={id} className="w-full bg-white shadow-lg rounded-lg p-4 outline-none" onClick={onClick}>
                     {image && <img src={image} alt={name} className="mb-4" />}
                     {name && <h2 className="text-xl font-bold mb-2">{name}</h2>}
-                </div>
+                </button>
             }
             {
                 type === 'detail' &&
